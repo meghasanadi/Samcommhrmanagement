@@ -4,9 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <html>
 	<head>
 					<meta charset="utf-8">
@@ -121,7 +118,7 @@
 						<div class="grid-40 page" id="pageC">
 											<!-- Header Starts -->
 							<div class="header cl">
-							 <%@include file="authheader.jsp" %> 
+							
 							
 								<a href="javascript:;" class="navL fl visible-phone no-callout" id="navLT"><span class="icon"></span></a>
 								

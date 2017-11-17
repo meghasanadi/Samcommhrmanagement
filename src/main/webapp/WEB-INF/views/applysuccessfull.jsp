@@ -123,7 +123,6 @@
 						<div class="grid-40 page" id="pageC">
 											<!-- Header Starts -->
 							<div class="header cl">
-							 <h5><%@include file="authheader.jsp" %></h5> 
 							
 								<a href="javascript:;" class="navL fl visible-phone no-callout" id="navLT"><span class="icon"></span></a>
 								

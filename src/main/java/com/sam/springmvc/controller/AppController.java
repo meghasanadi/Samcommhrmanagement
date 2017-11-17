@@ -1,6 +1,7 @@
 package com.sam.springmvc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sam.springmvc.model.Application;
@@ -37,7 +37,7 @@ import com.sam.springmvc.model.Job;
 import com.sam.springmvc.model.User;
 import com.sam.springmvc.model.UserDocument;
 import com.sam.springmvc.model.UserProfile;
-import com.sam.springmvc.service.ApplicationService;
+
 import com.sam.springmvc.service.JobService;
 import com.sam.springmvc.service.UserDocumentService;
 import com.sam.springmvc.service.UserProfileService;
@@ -67,8 +67,6 @@ public class AppController {
 	@Autowired
 	private JobService jobService;
 	
-	@Autowired
-	private ApplicationService appService;
 	
 	@Autowired
 	private UserDocumentService userDocumentService;
@@ -403,4 +401,5 @@ public class AppController {
 		document.setUser(user);
 		userDocumentService.saveDocument(document);
 	}
+
 }

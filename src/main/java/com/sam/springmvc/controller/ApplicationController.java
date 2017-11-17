@@ -1,21 +1,20 @@
 package com.sam.springmvc.controller;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
-import org.apache.coyote.http11.Http11AprProtocol;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,13 +37,13 @@ public class ApplicationController {
 	AuthenticationTrustResolver authenticationTrustResolver;
 	
 	@Autowired
-	private JobService jobService;
-	
-	@Autowired
 	private ApplicationService appService;
 	
+	@Autowired
+	private JobService jobService;
+	
 	@RequestMapping(value =  "/welcome**", method = RequestMethod.GET)
-	public ModelAndView welcome(ModelMap model1,@RequestParam("id") String id) {
+	public ModelAndView welcome(ModelMap model1, @RequestParam("id") String id) {
 
 		ModelAndView model = new ModelAndView();
 		Application app=new Application();
@@ -102,7 +101,7 @@ public class ApplicationController {
 		         model.addAttribute("genders", genders);
 	 }
 	 
-	 /*@RequestMapping(value = "/add-document-{id}", method = RequestMethod.GET)
+	/* @RequestMapping(value = "/add-document-{id}", method = RequestMethod.GET)
 		public ModelAndView listJob2(ModelAndView model) throws IOException {
 			List<Job> listJob2 = jobService.listActiveJobs();
 			model.addObject("listJob2", listJob2);
