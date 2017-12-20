@@ -88,12 +88,11 @@ public class AppController {
 	public ModelAndView listJob (ModelAndView modelview, ModelMap model) throws IOException {
 		List<Job> listJob = jobService.getAllJobs();
 		modelview.addObject("listJob", listJob);
+		
 		model.addAttribute("loggedinuser", getPrincipal());
 		modelview.setViewName("adminhome_joblist");
 		return modelview;
 	}
-
-
 	
 	@RequestMapping(value="/editJob",method = RequestMethod.GET)  
     public String editJob(@ModelAttribute("job") Job job, Model model,HttpServletRequest request){
@@ -103,11 +102,28 @@ public class AppController {
         return "EmployeeForm";
     }
 	
+	@RequestMapping(value="/UpdateJobResponses",method = RequestMethod.GET)  
+    public String UpdateJobResponses(@ModelAttribute("job") Job job, Model model,HttpServletRequest request){
+		job = jobService.getJob(job.getId());
+
+        model.addAttribute("job", this.jobService.updateJobResponses(job));
+        return "EmployeeForm";
+    }
+	
+	@RequestMapping(value="/editJob2",method = RequestMethod.GET)  
+    public String editJob2(@ModelAttribute("job") Job job, Model model,HttpServletRequest request){
+		job = jobService.getJob(job.getId());
+
+        model.addAttribute("job", this.jobService.updateJob(job));
+        return "EmployeeForm2";
+    }
+
 	@RequestMapping(value = "/deleteJob", method = RequestMethod.GET)
 	public ModelAndView deleteJob(HttpServletRequest request,Job job) {
 	    jobService.deleteJob(job.getId());
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/list");
 	}
+
 	
 	@RequestMapping(value = "/newjob", method = RequestMethod.GET)
 	public ModelAndView newContact(ModelAndView model, ModelMap model1) {
@@ -127,8 +143,8 @@ public class AppController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/saveJob", method = RequestMethod.POST)
-	  public ModelAndView saveJob(@ModelAttribute("job") Job job, 
+	  @RequestMapping(value = "/saveJob2", method = RequestMethod.POST)
+	  public ModelAndView saveJob2(@ModelAttribute("job") Job job, 
 				BindingResult result, HttpSession session) {
 			ModelAndView modelView;
 			
@@ -138,8 +154,23 @@ public class AppController {
 				return modelView;
 			}
 			
-			jobService.addJobs(job);
-			return new ModelAndView("redirect:/");
+			jobService.updateJob1(job);
+			return new ModelAndView("redirect:/list");
+	  }
+	  
+	  @RequestMapping(value = "/saveJob3", method = RequestMethod.POST)
+	  public ModelAndView saveJob3(@ModelAttribute("job") Job job, 
+				BindingResult result, HttpSession session) {
+			ModelAndView modelView;
+			
+			if (result.hasErrors()) {
+				
+				modelView = new ModelAndView("adminhome_joblist");
+				return modelView;
+			}
+			
+			jobService.updateJobResponses(job);
+			return new ModelAndView("redirect:/list");
 	  }
 
 	/**

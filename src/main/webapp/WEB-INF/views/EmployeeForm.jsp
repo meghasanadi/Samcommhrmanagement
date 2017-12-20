@@ -1,8 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- --%><%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 
 
 <html lang="en">
@@ -18,6 +21,9 @@
 		<!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+		
+		 <link href="${contextPath}/static/css/style.css" rel="stylesheet">
+		 
 
 		<title>Admin</title>
 		
@@ -30,7 +36,7 @@
 					body, html{
 						 height: 100%;
 						background-repeat: no-repeat;
-						background:url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
+						 background:url(http://www.issart.com/blog/wp-content/uploads/2016/10/shutterstock_480408787.jpg);
 						font-family: 'Oxygen', sans-serif;
 							background-size: cover;
 					}
@@ -109,9 +115,9 @@
 					.main-center{
 						margin-top: 30px;
 						margin: 0 auto;
-						max-width: 400px;
+						max-width: 600px;
 						padding: 10px 40px;
-						background:#009edf;
+						background:#1e73a7;
 							color: #FFF;
 						text-shadow: none;
 						-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -135,7 +141,7 @@
 
 		</style>
 	</head>
-	<body>
+	<body onload="myFunction()">
 		<div class="container">
 		
 
@@ -143,7 +149,7 @@
 
 
 				<div class="main-login main-center">
-				<h4 align="center">Add/Edit New Jobs</h4>
+				<h2 align="center">Post the job</h2>
 					<form:form action="saveJob" method="post" modelAttribute="job">
 					
 					 <form:hidden path="id"/>
@@ -152,9 +158,9 @@
 							<label for="name" class="cols-sm-2 control-label">Jobid</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<!-- <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> -->
 									<%--  <form:hidden path="jobid"/> --%>
-									<td><form:input path="jobid" /></td>
+									<form:input path="jobid" size="95"/>
 								</div>
 							</div>
 						</div>
@@ -163,8 +169,8 @@
 							<label for="email" class="cols-sm-2 control-label">Job Name</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<td><form:input path="job_name" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span> -->
+									<form:input path="job_name" size="95" />
 								</div>
 							</div>
 						</div>
@@ -173,8 +179,8 @@
 							<label for="username" class="cols-sm-2 control-label">Key Skills</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<td><form:input path="keyskills" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span> -->
+									<form:input path="keyskills" size="95" />
 								</div>
 							</div>
 						</div>
@@ -183,38 +189,59 @@
 							<label for="username" class="cols-sm-2 control-label">Location</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<td><form:input path="job_designation" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span> -->
+									<form:input path="job_designation" size="95"/>
 								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Description</label>
+							<label for="name" class="cols-sm-2 control-label">Description(2000 words only)</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<td><form:textarea path="job_description" /></td>
+<!-- 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+ -->									<form:textarea path="description" rows="5" cols="80" accept-charset="ISO-8859-1" />
 								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Short Description(50 word only)</label>
+							<label for="name" class="cols-sm-2 control-label">Roles and responsibilities</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<td><form:textarea path="shortdescription" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> -->
+<%-- 									<td><form:textarea path="job_description" rows="10" cols="54" accept-charset="ISO-8859-1"/></td>
+	 --%>								<form:textarea path="job_description" rows="10" cols="80" accept-charset="ISO-8859-1" />
+							</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Short Description(50 words only)</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+<!-- 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+ -->									<form:textarea path="shortdescription" rows="5" cols="80" accept-charset="ISO-8859-1" />
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="form-group">
 							<label for="email" class="cols-sm-2 control-label">Experience</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<td><form:input path="experience" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span> -->
+									<form:input path="experience" size="95" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Salary</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<!-- <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span> -->
+									<form:input path="Salary" size="95"/>
 								</div>
 							</div>
 						</div>
@@ -223,31 +250,28 @@
 							<label for="name" class="cols-sm-2 control-label">Job Type</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<td><form:input path="job_type" /></td>
+									<!-- <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> -->
+									<form:input path="job_type" size="95" />
 								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Status</label>
-							<div class="cols-sm-10">
-								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-								<form:input path="status" />						
-								<%-- <div class="input-group">
-									<select>
-										  <option value="volvo">Active</option>
-										  <option value="saab">Inactive</option>
-									</select>	  
-									<form:input path="status" />
-								</div> --%>
 							</div>
 						</div>
 						
 
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Status</label>
+							<div class="cols-sm-10">
+								<!-- <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> -->
+								<form:input path="status" size="95" />						
+							</div>
+						</div>
+						
+						<p id="date"></p>
+						<form:hidden value="${loggedinuser}" path="postedBy" />						
+						<form:hidden path="responses" size="95"/>
+						  
 						<div class="form-group ">
 <!-- 							<a href="http://deepak646.blogspot.in" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">SAVE</a>
- -->							<input type="submit" value="Save"></td> <button type="reset" value="Reset">Cancel</button>
+ -->							<input type="submit" value="Save"><button type="reset" value="Reset">Cancel</button>
 						</div>
 						
 					</form:form>
@@ -255,9 +279,71 @@
 			</div>
 		</div>
 
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		
+
+    <script  src="${contextPath}/static/js/index.js"></script>
 		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- TinyMCE -->
+<script type="text/javascript" src="jscripts/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="js/editor_plugin.js"></script>
+<script>
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+tinyMCE.init({
+    mode : "textareas",
+    theme : "advanced",
+     
+     
+     /* the URL to the button image to display */
+        atd_button_url              : "images/atdbuttontr.gif",
+ 
+        /* the URL of your proxy file */
+        atd_rpc_url                 : "server/proxy.php?url=",
+ 
+        /* set your API key */
+        atd_rpc_id                  : "dashnine",
+ 
+        /* edit this file to customize how AtD shows errors */
+        atd_css_url                 : "css/content.css",
+ 
+        /* this list contains the categories of errors we want to show */
+        atd_show_types              : "Bias Language,Cliches,Complex Expression,Diacritical Marks,Double Negatives,Hidden Verbs,Jargon Language,Passive voice,Phrases to Avoid,Redundant Expression",
+ 
+        /* strings this plugin should ignore */
+        atd_ignore_strings          : "AtD,rsmudge",
+ 
+        /* enable "Ignore Always" menu item, uses cookies by default. Set atd_ignore_rpc_url to a URL AtD should send ignore requests to. */
+        atd_ignore_enable           : "false",
+         gecko_spellcheck : true,
+     
+    theme_advanced_buttons1 : "fontsizeselect,bold,italic,underline,strikethrough,separator,sub,sup,separator,cut,copy,paste,undo,redo,AtD",
+    theme_advanced_buttons2 : "justifyleft,justifycenter,justifyright,justifyfull,separator,numlist,bullist,outdent,indent,separator,forecolor,backcolor,separator,hr,link,unlink,table,code",
+    theme_advanced_buttons3 : "",
+    theme_advanced_fonts : "Arial=arial,helvetica,sans-serif,Courier New=courier new,courier,monospace,Georgia=georgia,times new roman,times,serif,Tahoma=tahoma,arial,helvetica,sans-serif,Times=times new roman,times,serif,Verdana=verdana,arial,helvetica,sans-serif",
+    theme_advanced_toolbar_location : "top",
+    theme_advanced_toolbar_align : "left",
+    theme_advanced_statusbar_location : "bottom",
+    plugins : 'asciimath,asciisvg,table,inlinepopups,media,AtD',
+   // theme_advanced_toolbar_location: "external",
+        
+    editor_selector :"mceEditor", 
+    width:'100%',
+    content_css : "css/content.css",
+    forced_root_block : false,
+    force_br_newlines : true,
+    force_p_newlines : false,
+    theme_advanced_resizing : true
+     
+});
+</script>
+	
 	</body>
 </html>

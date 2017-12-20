@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,6 +50,7 @@ public class ApplicationController {
 		model.addObject("app", app);
 		model.addObject("jobid", id);
 		
+		
 		 List<String> genders = new ArrayList<String>();
          genders.add("Male");
          genders.add("Female");
@@ -73,8 +74,6 @@ public class ApplicationController {
 		if (app.getId() == 0) { // if employee id is 0 then creating the
 			// employee other updating the employee
 			appService.addApplication(app);
-			
-			
 		} 
 		else {
 		}
@@ -101,12 +100,23 @@ public class ApplicationController {
 		         model.addAttribute("genders", genders);
 	 }
 	 
-	/* @RequestMapping(value = "/add-document-{id}", method = RequestMethod.GET)
-		public ModelAndView listJob2(ModelAndView model) throws IOException {
-			List<Job> listJob2 = jobService.listActiveJobs();
-			model.addObject("listJob2", listJob2);
-			model.setViewName("home2");
+	 @RequestMapping(value = "/viewResponses", method = RequestMethod.GET)
+		public ModelAndView viewResponses(ModelAndView modelview, ModelMap model,@RequestParam("jobid") String jobid) throws IOException {
+			
+		    Application app=new Application();
+		 	List<Application> listapp=appService.getResponses(jobid);
+			modelview.addObject("listapp", listapp);
+			model.addAttribute("loggedinuser", getPrincipal());
+			modelview.setViewName("viewResponse");
+			return modelview;
+		}
+	 
+	 @RequestMapping(value = "/viewApplicantDetails", method = RequestMethod.GET)
+		public ModelAndView viewDetails(HttpServletRequest request,Application app) {
+		    app=appService.getApplication(app.getId());
+			ModelAndView model = new ModelAndView("viewApplicantDetails");
+			model.addObject("app", app);
 			return model;
-		}*/
+		}
 	
 }

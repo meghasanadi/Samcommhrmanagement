@@ -1,11 +1,19 @@
 package com.sam.springmvc.model;
 
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "job_seeker_application")
@@ -14,6 +22,9 @@ public class Application {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column
+	private String user_id;
 	
 	@Column
 	private String firstname;
@@ -31,6 +42,13 @@ public class Application {
 	private String curcompany; 
 	private String comments;
 	private String applied;
+	private String experience;
+	
+
+	@Column(name="date",columnDefinition="TIMESTAMP")      
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date date=new Date();
 	
 	public int getId() {
 		return id;
@@ -38,6 +56,14 @@ public class Application {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -129,14 +155,29 @@ public class Application {
 	public void setApplied(String applied) {
 		this.applied = applied;
 	}
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public String getExperience() {
+		return experience;
+	}
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", phoneno=" + phoneno + ", dob=" + dob + ", gender=" + gender + ", position=" + position
-				+ ", salary_exp=" + salary_exp + ", noticeperiod=" + noticeperiod + ", willingTorellocate="
+		return "Application [id=" + id + ", user_id=" + user_id + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", email=" + email + ", phoneno=" + phoneno + ", dob=" + dob + ", gender=" + gender + ", position="
+				+ position + ", salary_exp=" + salary_exp + ", noticeperiod=" + noticeperiod + ", willingTorellocate="
 				+ willingTorellocate + ", relocatelocation=" + relocatelocation + ", pancard=" + pancard
 				+ ", curcompany=" + curcompany + ", comments=" + comments + ", applied=" + applied + "]";
 	}
-
+	
 	
 }

@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "job_tbl")
@@ -28,12 +32,15 @@ public class Job implements Serializable {
 	@Column
 	private String job_name;
 	
-	@Column
-	private Date date;
+    @Column(name="date",columnDefinition="TIMESTAMP")      
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private Date date=new Date();
 	private Time time;
 	private String keyskills;
 	private String job_designation;
 	private String job_description;
+	private String description;
 	private String experience;
 	private String job_type;
 	private String companyname;
@@ -42,7 +49,46 @@ public class Job implements Serializable {
 	private String shortdescription;
 	@Column
 	private String status;
+	private String responses;
+	private String postedBy;
+	
+	public Job() {
+		super();
+		
+	}
 
+	public Job(int id, String jobid, String job_name, Date date,String keyskills, String job_designation,
+			String job_description,String description, String experience, String job_type, String companyname, String Salary,
+			String Functionalarea, String shortdescription, String status, String responses, String postedBy) {
+		super();
+		this.id = id;
+		this.jobid = jobid;
+		this.job_name = job_name;
+		this.date=date;
+		this.keyskills = keyskills;
+		this.job_designation = job_designation;
+		this.job_description = job_description;
+		this.description = description;
+		this.experience = experience;
+		this.job_type = job_type;
+		this.companyname = companyname;
+		this.Salary = Salary;
+		this.Functionalarea = Functionalarea;
+		this.shortdescription = shortdescription;
+		this.status = status;
+		this.responses=responses;
+		this.postedBy=postedBy;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	public String getJobid() {
 		return jobid;
 	}
@@ -112,14 +158,14 @@ public class Job implements Serializable {
 	public String getSalary() {
 		return Salary;
 	}
-	public void setSalary(String salary) {
-		Salary = salary;
+	public void setSalary(String Salary) {
+		this.Salary = Salary;
 	}
 	public String getFunctionalarea() {
 		return Functionalarea;
 	}
-	public void setFunctionalarea(String functionalarea) {
-		Functionalarea = functionalarea;
+	public void setFunctionalarea(String Functionalarea) {
+		this.Functionalarea = Functionalarea;
 	}
 	public String getShortdescription() {
 		return shortdescription;
@@ -130,12 +176,31 @@ public class Job implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public int getId() {
-		return id;
+	
+	public String getDescription() {
+		return description;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
+	
+	public String getResponses() {
+		return responses;
+	}
+
+	public void setResponses(String responses) {
+		this.responses = responses;
+	}
+
+	public String getPostedBy() {
+		return postedBy;
+	}
+
+	public void setPostedBy(String postedBy) {
+		this.postedBy = postedBy;
+	}
+	
 	
 
 }

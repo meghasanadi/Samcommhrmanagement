@@ -197,7 +197,7 @@
                               <a href="viewDetails?id=${job.id}"><em class="fa fa-pencil"></em></a>
                             </td>
                               	<td>${job.jobid}</td>
-                             <p><td>${job.job_description}</td></p><br>
+                                <td>${job.job_description}</td><br>
 	                            <td>Salary:${job.salary}</td><br>
 	                            <td>Functional area:${job.functionalarea}</td><br>
 	                            <td>Role:${job.job_name}</td><br>

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -46,6 +47,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		viewResolver.setSuffix(".jsp");
 		registry.viewResolver(viewResolver);
 	}
+	
+	 @Override
+	  public void addViewControllers(ViewControllerRegistry registry) {
+	    registry.addViewController("/home").setViewName("home");
+	  }
 	
 	/**
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...

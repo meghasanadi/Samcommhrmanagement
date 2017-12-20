@@ -2,6 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
   
@@ -160,52 +161,41 @@
 <div class="row header" style="color:#00a1ff!important">
 <h3 align="center">Job List</h3>
 </div>
-<table id="myTable" class="table table-striped table-bordered dt-responsive nowrap">  
+    <table id="myTable" class="table table-striped table-bordered dt-responsive nowrap">  
         <thead>  
           <tr>  
-            <th><em class="fa fa-cog" style="text-align: center;color: "></em></th>
+                        <th><em class="fa fa-cog" style="text-align: center"></em></th>
                         <th style="text-align:left;color: black">JobId</th>
                         <th style="text-align:left;color: black">Job Name</th>
-                    	<th style="text-align:left;color: black">KeySkills</th>
-                    	<th style="text-align:left;color: black">Location</th>
-                    	<!-- <th style="text-align:left;color: black">Description</th> -->
-                    	<th style="text-align:left;color: black">Experience</th>
-                    	<th style="text-align:left;color: black">JobType</th>
-                    	<th style="text-align:left;color: black">Status</th> 
+                    	<th style="text-align:left;color: black">Posted Date</th>
+                    	<th style="text-align:left;color: black">PostedBy</th>
+                    	<th style="text-align:left;color: black">Responses</th>
+                    	
           </tr>  
         </thead>  
-        <tbody>  
-        				<c:forEach var="job" items="${listJob}">
+        <tbody>
+                  <c:forEach var="job" items="${listJob}">
                           <tr>
                             <td align="center">
-                              <a href="editJob?id=${job.id}"><em class="fa fa-pencil"></em></a>
-                              <a href="deleteJob?id=${job.id}"><em class="fa fa-trash"></em></a>
+	                              <a href="editJob2?id=${job.id}">Format | </a>
+	                              <a href="editJob?id=${job.id}"> Edit | </a>
+	                              <a href="deleteJob?id=${job.id}"> Remove</a>
                             </td>
+                            <td><a href="viewDetails2?id=${job.id}"><h6>${job.jobid}</h6></a></td>
+                            <td>${job.job_name} </td>
+                            <td><fmt:formatDate value="${job.date}" pattern="dd-MM-yyyy" /></td>
+                            <td>${job.postedBy}</td>
+                            <td><a href="viewResponses?jobid=${job.jobid}">${job.responses}</a></td>
                             
-                            <td class="hidden-xs"><a href="viewDetails2?id=${job.id}"><h6>${job.jobid}</h6></a>
-</td>
-                            
-                            <%-- <td class="hidden-xs">${job.jobid}</td> --%>
-                            <td>${job.job_name}</td>
-                            <td>${job.keyskills}</td>
-                            <td style="width:50px">${job.job_designation}</td>
-<%--                              <td style="width:50px">${job.job_description}</td>
- --%>							<td style="width:50px">${job.experience}</td>
-							<td style="width:50px">${job.job_type}</td>
-							<td>${job.status}</td>
-							
-							<%-- <td> <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                </label>${job.status}</td> --%>
                           </tr>
                      </c:forEach>     
-        </tbody>  
-      </table>  
-       <a href="newjob">Click to add new jobs here</a>
+                        </tbody>
+      </table>
+       <a href="newjob?user=${loggedinuser}"> Click to add new jobs here</a>
 	  </div>
 </body>  
 <script>
+
 $(document).ready(function(){
     $('#myTable').dataTable();
 });

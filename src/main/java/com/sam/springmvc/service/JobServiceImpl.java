@@ -34,7 +34,6 @@ public class JobServiceImpl implements JobService {
 		return jobdao.listActiveJobs();
 	}
 
-
 	@Override
 	public Job updateJob(Job job) {
 		return jobdao.updateJob(job);
@@ -51,8 +50,15 @@ public class JobServiceImpl implements JobService {
 		return jobdao.getJob(jobid);
 	}
 
+	@Override
+	public int updateJob1(Job job) {
+		return jobdao.updateJob1(job);
+	}
 
-
-	
+	@Override
+	public int updateJobResponses(Job job) {
+		
+		return jobdao.updateJobResponses(job);
+	}
 
 }

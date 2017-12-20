@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER_DOCUMENT")
+@Table(name="user_document")
 public class UserDocument {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

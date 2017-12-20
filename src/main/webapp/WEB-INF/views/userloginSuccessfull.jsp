@@ -3,6 +3,7 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 	<head>
@@ -197,15 +198,14 @@
 				        <form:form action="saveEmployee" method="post" modelAttribute="app">
 				        <table>
 				        
-				        <%String jobid=request.getParameter("id");
-				         
-				         %>
-				         
-				          <%-- <%String jobid=request.getParameter("id");
-					            System.out.println(jobid);
-					            %> --%>
+				       
 				            <form:hidden path="id"/>
 				           
+				           <tr>
+				                <td>UserId</td>
+				                <td><form:input path="user_id" /></td>
+				            </tr>
+				            
 				            <tr>
 				                <td>First Name:</td>
 				                <td><form:input path="firstname" /></td>
@@ -271,6 +271,8 @@
 				                <td>Comment (limit:100 words)</td>
 				                <td><form:textarea path="comments" /></td>
 				            </tr>
+				            
+				            <p id="date"></p>
 				            
 				            <tr>
 				                <form:hidden value="Applied" path="applied"/>
@@ -378,6 +380,12 @@
 			jQuery(function($) {
 			$('a[rel^="prettyPhoto"]').prettyPhoto();
 			});
+			
+			n=new Date();
+			y=n.getFullYear();
+			m=n.getMonth()+1;
+			d=n.getDate();
+			documnet.getElementById("date").innerHTML= m + "/" + d + "/" + y;
 			</script>
 			<div id="autosuggest" style="display:none;"><ul><li></li></ul></div>
 			<div id="autosuggest1" style="display:none;"><ul><li></li></ul></div>
